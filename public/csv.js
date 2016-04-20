@@ -81,6 +81,14 @@ $(document).ready(() => {
           'json'
         );
     });
+    
+    /* Boton guardar */
+    $("#save").click( () => {
+      $.get("/datos/guardar",
+        { textocsv: original.value }
+      );
+    });
+    
    /* botones para rellenar el textarea */
    $('button.example').each((index, element) => {
      $(element).click(() => {
