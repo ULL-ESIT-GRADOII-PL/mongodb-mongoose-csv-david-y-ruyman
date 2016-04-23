@@ -6,7 +6,7 @@ const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/csv');
+//mongoose.connect('mongodb://localhost/csv');
 var csvSchema = new mongoose.Schema({
   nombre: String,
   datos:  String
@@ -35,22 +35,32 @@ app.listen(app.get('port'), () => {
     console.log(`Node app is running at localhost: ${app.get('port')}` );
 });
 
-// Obtener un dato de la base de datos
-app.get('/datos/:ejemplo', function(request, response) { 
-  var query = datosCsv.findOne({ 'nombre': request.params.ejemplo });
-  response.send(query || '');
-});
-
 // Guardar datos
-app.get('/datos/guardar', function(request, response) { 
+app.get('/guardarcsv', function(request, response) {
+  mongoose.connect('mongodb://localhost/csv');
+  
   let dato = new datosCsv({"nombre":"ejemplo1", "datos": request.query.textocsv});
   let p1 = dato.save(function (err) {
-    if (err) { console.log(`Hubieron errores:\n${err}`); return err; }
+    if (err) { console.log(`Error al guardar:\n${err}`); return err; }
+  });
+  
+  Promise.all([p1]).then( (value) => { 
+    mongoose.connection.close(); 
   });
 });
 
+// Obtener un dato de la base de datos
+app.get('/datos/:ejemplo', function(request, response) {
+  mongoose.connect('mongodb://localhost/csv');
+  var query = datosCsv.findOne({ 'nombre': request.params.ejemplo });
+  mongoose.connection.close(); 
+  response.send(query || '');
+});
+
 // Obtener todos los datos almacenados
-app.get('/datos', function(req, res) { 
+app.get('/listadatos', function(req, res) { 
+  mongoose.connect('mongodb://localhost/csv');
   var query = datosCsv.find({});
+  mongoose.connection.close(); 
   res.send(query);
 });

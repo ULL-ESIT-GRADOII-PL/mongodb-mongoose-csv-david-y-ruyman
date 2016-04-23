@@ -84,13 +84,19 @@ $(document).ready(() => {
     
     /* Boton guardar */
     $("#save").click( () => {
-      $.get("/datos/guardar",
+      $.get("/guardarcsv",
         { textocsv: original.value }
       );
     });
     
    /* botones para rellenar el textarea */
-   $('button.example').each((index, element) => {
+   var datos;
+   $.get("/listadatos",
+        {},
+        datos,
+        'json'
+      );
+   datos.each((index, element) => {
      $(element).click(() => {
         dump(`${$(element).text()}.txt`);
       });
