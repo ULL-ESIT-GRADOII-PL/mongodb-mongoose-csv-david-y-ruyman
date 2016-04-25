@@ -30,6 +30,14 @@ const dump = (fileName) => {
   });
 };
 
+var csvActual = 'Personalizado';
+
+const cargarArchivo = (name) => {
+  $.get("/datos/" + name, {}, (data) => {
+    csvActual = name;
+    $("#original").val(data.datos);
+   }, 'json')
+}
 const handleFileSelect = (evt) => {
   evt.stopPropagation();
   evt.preventDefault();
@@ -85,46 +93,15 @@ $(document).ready(() => {
     /* Boton guardar */
     $("#save").click( () => {
       $.get("/actualizarcsv",
-        { nombre: "prueba", textocsv: original.value }
+        { nombre: csvActual, textocsv: original.value }
       );
     });
-
-    $("#1").click( () => {
-        $.get("/listadatos",
-          { input: 1 },
-          fillBd,
-          'json'
-        );
-     });
-
-     $("#2").click( () => {
-        $.get("/listadatos",
-          { input: 2 },
-          fillBd,
-          'json'
-        );
-     });
-
-     $("#3").click( () => {
-        $.get("/listadatos",
-          { input: 3 },
-          fillBd,
-          'json'
-        );
-     });
-
-     $("#4").click( () => {
-        $.get("/listadatos",
-          { input: 4 },
-          fillBd,
-          'json'
-        );
-     });
+  
    /* botones para rellenar el textarea */
    $.get("/listadatos", {}, (datos) => {
-      datos.each((index, element) => {
-        $(element.nombre).click(() => {
-           $("#original").val(element.datos);
+      datos.lista[0].forEach((element, index) => {
+        $("#" + element[0]).click(() => {
+          cargarArchivo (element[0]);
       });
    }, 'json')
   });
