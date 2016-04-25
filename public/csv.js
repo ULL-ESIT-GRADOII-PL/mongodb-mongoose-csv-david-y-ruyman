@@ -84,24 +84,20 @@ $(document).ready(() => {
     
     /* Boton guardar */
     $("#save").click( () => {
-      $.get("/guardarcsv",
-        { textocsv: original.value }
+      $.get("/actualizarcsv",
+        { nombre: "prueba", textocsv: original.value }
       );
     });
-    
+  
    /* botones para rellenar el textarea */
-   var datos;
-   $.get("/listadatos",
-        {},
-        datos,
-        'json'
-      );
-   datos.each((index, element) => {
-     $(element).click(() => {
-        dump(`${$(element).text()}.txt`);
+   $.get("/listadatos", {}, (datos) => {
+      datos.each((index, element) => {
+        $(element.nombre).click(() => {
+           $("#original").val(element.datos);
       });
-   });
-
+   }, 'json')
+  });
+  
     // Setup the drag and drop listeners.
     //var dropZone = document.getElementsByClassName('drop_zone')[0];
     let dropZone = $('.drop_zone')[0];
