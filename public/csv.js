@@ -88,7 +88,38 @@ $(document).ready(() => {
         { nombre: "prueba", textocsv: original.value }
       );
     });
-  
+
+    $("#1").click( () => {
+        $.get("/listadatos",
+          { input: 1 },
+          fillBd,
+          'json'
+        );
+     });
+
+     $("#2").click( () => {
+        $.get("/listadatos",
+          { input: 2 },
+          fillBd,
+          'json'
+        );
+     });
+
+     $("#3").click( () => {
+        $.get("/listadatos",
+          { input: 3 },
+          fillBd,
+          'json'
+        );
+     });
+
+     $("#4").click( () => {
+        $.get("/listadatos",
+          { input: 4 },
+          fillBd,
+          'json'
+        );
+     });
    /* botones para rellenar el textarea */
    $.get("/listadatos", {}, (datos) => {
       datos.each((index, element) => {
@@ -97,7 +128,7 @@ $(document).ready(() => {
       });
    }, 'json')
   });
-  
+
     // Setup the drag and drop listeners.
     //var dropZone = document.getElementsByClassName('drop_zone')[0];
     let dropZone = $('.drop_zone')[0];
