@@ -3,14 +3,14 @@ table.center {
 	color: black;
 	text-align: center;
 
-	margin-left: 90px;
-	margin-top: 10px;
+	margin-left: 120px;
+	margin-top: 30px;
 
 	border: ridge;
-	border-color: blue;
+	border-color: black;
 
-	background-color: white;
+	background-color: gray;
 }
 .output tr:nth-child(odd)    { background-color:#eee; }
 .output tr:nth-child(even)   { background-color:#00FF66; }
-.error td{ background-color: red; }
+.error td{ background-color: gray; }

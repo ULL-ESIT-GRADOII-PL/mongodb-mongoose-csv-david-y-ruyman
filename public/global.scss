@@ -1,0 +1,26 @@
+$tipoLetra: bold;
+$colorTabla: black;
+$alineacionTexto: center;
+$margenIzquierdo: 120px;
+$margenSuperior: 30px;
+$tipoBorde: ridge;
+$colorBorde: black;
+$colorFondo: gray;
+
+
+table.center {
+	font-weight: $tipoLetra;
+	color: $colorTabla;
+	text-align: $alineacionTexto;
+
+	margin-left: $margenIzquierdo:;
+	margin-top: $margenSuperior;
+
+	border: $tipoBorde;
+	border-color: $colorBorde;
+
+	background-color: $colorFondo;
+}
+.output tr:nth-child(odd)    { background-color:#eee; }
+.output tr:nth-child(even)   { background-color:#00FF66; }
+.error td{ background-color: $colorFondo; }
