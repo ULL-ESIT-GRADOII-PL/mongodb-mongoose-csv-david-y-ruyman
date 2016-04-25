@@ -98,6 +98,7 @@ $(document).ready(() => {
     });
   
    /* botones para rellenar el textarea */
+   
    $.get("/listadatos", {}, (datos) => {
       datos.lista[0].forEach((element, index) => {
         $("#" + element[0]).click(() => {
@@ -105,7 +106,20 @@ $(document).ready(() => {
       });
    }, 'json')
   });
-
+  /*
+  $("#input1").click(() => {
+      cargarArchivo ("input");
+  });
+  $("#input2").click(() => {
+      cargarArchivo ("input2");
+  });
+  $("#input3").click(() => {
+      cargarArchivo ("input3");
+  });
+  $("#Personalizado").click(() => {
+      cargarArchivo ("Personalizado");
+  });
+  */
     // Setup the drag and drop listeners.
     //var dropZone = document.getElementsByClassName('drop_zone')[0];
     let dropZone = $('.drop_zone')[0];
